@@ -90,6 +90,14 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 checkAnswer(true);
+                if (quizBrain.isFinished()) {
+                  // 1. show alert
+
+                  // 2. reset questionNumber
+                  quizBrain.resetQuestionNumber();
+                  // 3. empty scorekeeper;
+                  scoreKeeper = [];
+                }
               },
             ),
           ),
