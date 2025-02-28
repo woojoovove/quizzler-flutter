@@ -27,16 +27,29 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Widget> scoreKeeper = [
-    Icon(
-      Icons.check,
-      color: Colors.green,
-    ),
-    Icon(
-      Icons.close,
-      color: Colors.red,
-    )
-  ];
+  List<Icon> scoreKeeper = [];
+  void checkAnswer(bool userPickedAnswer) {
+    bool correctAnswer = quizBrain.getCorrectAnswer();
+    if (correctAnswer == true) {
+      scoreKeeper.add(
+        Icon(
+          Icons.check,
+          color: Colors.green,
+        ),
+      );
+    } else {
+      scoreKeeper.add(
+        Icon(
+          Icons.close,
+          color: Colors.red,
+        ),
+      );
+    }
+
+    setState(() {
+      quizBrain.nextQuestion();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,23 +88,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = quizBrain.getCorrectAnswer();
-                if (correctAnswer == true) {
-                  print('correct');
-                } else {
-                  print('wrong');
-                }
-
-                setState(() {
-                  quizBrain.nextQuestion();
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ),
-                  );
-                });
-                //The user picked true.
+                checkAnswer(true);
               },
             ),
           ),
@@ -111,16 +108,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = quizBrain.getCorrectAnswer();
-                if (correctAnswer == false) {
-                  print('correct');
-                } else {
-                  print('wrong');
-                }
-                setState(() {
-                  quizBrain.nextQuestion();
-                });
-                //The user picked false.
+                checkAnswer(false);
               },
             ),
           ),
