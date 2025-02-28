@@ -37,4 +37,10 @@ class QuizBrain {
   bool getCorrectAnswer() {
     return _questionBank[_questionNumber].questionAnswer;
   }
+
+  void nextQuestion() {
+    if (_questionNumber < _questionBank.length - 1) {
+      _questionNumber++;
+    } else {}
+  }
 }

@@ -83,7 +83,7 @@ class _QuizPageState extends State<QuizPage> {
                 }
 
                 setState(() {
-                  questionNumber++;
+                  quizBrain.nextQuestion();
                   scoreKeeper.add(
                     Icon(
                       Icons.check,
@@ -118,7 +118,7 @@ class _QuizPageState extends State<QuizPage> {
                   print('wrong');
                 }
                 setState(() {
-                  questionNumber++;
+                  quizBrain.nextQuestion();
                 });
                 //The user picked false.
               },
